@@ -26,4 +26,7 @@ Route::middleware(['web'])->group(function () {
 Route::post('/api/pacientes/agregarpaciente', [App\Http\Controllers\PacienteController::class,'agregarpaciente']);
 Route::delete('/api/pacientes/eliminar/{id}', [App\Http\Controllers\PacienteController::class, 'eliminar']);
 Route::post('/api/pacientes/editarpaciente/{id}', [App\Http\Controllers\PacienteController::class, 'update']);
+
+Route::post('/api/user/', [App\Http\Controllers\Loginauth::class, 'validateuser']);
+
 });
