@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('numero_documento', 12)->nullable();
             $table->string('nombres', 60)->nullable();
-            $table->string('apellidos', 60)->nullable();
+            $table->string('apellido_paterno', 60)->nullable();
+            $table->string('apellido_materno', 60)->nullable();
             $table->string('telefono', 10)->nullable();
             $table->string('sexo', 60)->nullable();
             $table->string('password', 60)->nullable();
