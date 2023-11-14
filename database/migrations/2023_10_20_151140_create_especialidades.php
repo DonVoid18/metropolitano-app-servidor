@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -21,6 +22,16 @@ return new class extends Migration
             $table->timestamps();
 
         });
+        $especialidades = [
+            ['nombre' => 'Cardiología', 'descripcion' => 'a', 'activo' => 'S'],
+            ['nombre' => 'Radiología', 'descripcion' => 'a', 'activo' => 'S'],
+            ['nombre' => 'Ginecología', 'descripcion' => 'a', 'activo' => 'S'],
+            ['nombre' => 'Pediatría', 'descripcion' => 'a', 'activo' => 'S'],
+            // Agrega más especialidades según sea necesario
+        ];
+        foreach ($especialidades as $especialidad) {
+            DB::table('especialidades')->insert($especialidad);
+        }
     }
 
     /**
