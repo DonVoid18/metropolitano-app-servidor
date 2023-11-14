@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('fecha_nacimiento', 60)->nullable();
             $table->string('imagen', 255)->nullable();
             $table->string('grupo_sangre', 60)->nullable();
-            $table->string('email', 60)->nullable();
+            $table->string('correo', 60)->nullable();
             $table->char('activo', 1)->default('S')->comment("S=si, N=no");
             $table->date('fecha_retiro')->nullable();
             $table->timestamps();
