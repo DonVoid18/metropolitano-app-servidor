@@ -15,11 +15,12 @@ return new class extends Migration
     {
         Schema::create('doctores', function (Blueprint $table) {
             $table->id();
+            $table->string('dni', 50)->nullable();
             $table->string('nombres', 100)->nullable();
             $table->string('apellidos', 255)->nullable();
             $table->foreignId('cod_especialidad')->nullable()->references('id')->on('especialidades')->onDelete('restrict');
-            $table->char('sexo', 1)->nullable();
-            $table->char('char', 9)->nullable();
+            $table->char('sexo', 20)->nullable();
+            $table->char('telefono', 10)->nullable();
             $table->char('correo',50)->nullable();
             $table->char('activo', 1)->default('S')->comment("S=si, N=no");
             $table->timestamps();
