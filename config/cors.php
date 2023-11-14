@@ -14,11 +14,12 @@ return [
     | To learn more: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
     |
     */
-
-    'paths' => ['api/*', 'sanctum/csrf-cookie', 'get-csrf-token','api/pacientes/agregarpaciente','doctor/buscarespecialidad'
-    ,'doctor/agregardoctor','doctor/agregarhorario','doctor/buscardoctor','doctor/eliminardoctor/*'
-    ,'doctor/actualizardoctor/*','doctor/buscarhorarios','doctor/agregarhorario'
-    ,'doctor/actualizarhorario/*','doctor/eliminarhorario/*','doctor/agregarhorario_doctor'], // Agrega tu punto final aquí
+    // 'api/*', 'sanctum/csrf-cookie', 'get-csrf-token','api/pacientes/agregarpaciente','doctor/buscarespecialidad'
+    // ,'doctor/agregardoctor','doctor/agregarhorario','doctor/buscardoctor','doctor/eliminardoctor/*'
+    // ,'doctor/actualizardoctor/*','doctor/buscarhorarios','doctor/agregarhorario'
+    // ,'doctor/actualizarhorario/*','doctor/eliminarhorario/*','doctor/agregarhorario_doctor'
+    
+    'paths' => ['*'], // Agrega tu punto final aquí
     'allowed_origins' => ['*'],
     'allowed_headers' => ['*'],
     'allowed_methods' => ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
