@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('numero_documento', 12)->nullable();
             $table->string('nombres', 60)->nullable();
-            $table->string('apellidos', 60)->nullable();
+            $table->string('apellido_paterno', 60)->nullable();
+            $table->string('apellido_materno', 60)->nullable();
             $table->string('telefono', 10)->nullable();
             $table->string('sexo', 60)->nullable();
             $table->string('password', 60)->nullable();
@@ -26,7 +27,7 @@ return new class extends Migration
             $table->string('fecha_nacimiento', 60)->nullable();
             $table->string('imagen', 255)->nullable();
             $table->string('grupo_sangre', 60)->nullable();
-            $table->string('email', 60)->nullable();
+            $table->string('correo', 60)->nullable();
             $table->char('activo', 1)->default('S')->comment("S=si, N=no");
             $table->date('fecha_retiro')->nullable();
             $table->timestamps();

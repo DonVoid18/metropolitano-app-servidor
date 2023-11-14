@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre', 100)->nullable();
             $table->string('usuario', 15)->nullable();
-            $table->string('email', 50)->nullable();
+            $table->string('correo', 50)->nullable();
             $table->string('password',255)->nullable();
             $table->char('activo', 1)->default('S')->comment("S=si, N=no");
             $table->timestamps();
