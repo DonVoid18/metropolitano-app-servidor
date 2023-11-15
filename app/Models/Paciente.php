@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Carbon;
 class Paciente extends Model
 {
     use HasFactory;
@@ -27,6 +27,11 @@ class Paciente extends Model
         'created_at'
     ];
 
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('Y-m-d');
+    }
+    
     public function citas()
     {
         return $this->hasMany(Cita::class, 'cod_paciente', 'id');

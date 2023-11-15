@@ -19,27 +19,32 @@ Route::get('/', function () {
 
 Route::get('/get-csrf-token', [App\Http\Controllers\PacienteController::class, 'getCsrfToken']);
 
-
-Route::get('/api/pacientes',[App\Http\Controllers\PacienteController::class, 'listarPacientes']);
-
-
+//pacientes//
+Route::get('/pacientes/buscarpacientes',[App\Http\Controllers\PacienteController::class, 'listarPacientes']);
+Route::post('/pacientes/agregarpaciente',[App\Http\Controllers\PacienteController::class, 'agregarpaciente']);
+Route::post('/pacientes/actualizarpaciente/{id}',[App\Http\Controllers\PacienteController::class, 'actualizarpaciente']);
+Route::post('/pacientes/eliminarpaciente/{id}', [App\Http\Controllers\PacienteController::class, 'eliminarpaciente']);
 //doctores//
 Route::get('/doctor/buscarespecialidad',[App\Http\Controllers\DoctorController::class, 'buscarespecialidad']);
 Route::get('/doctor/buscardoctor',[App\Http\Controllers\DoctorController::class, 'listardoctores']);
-Route::get('/doctor/buscarhorarios',[App\Http\Controllers\DoctorController::class, 'buscarhorarios']);
 Route::post('/doctor/agregardoctor',[App\Http\Controllers\DoctorController::class, 'agregardoctor']);
-Route::post('/doctor/agregarhorario_doctor',[App\Http\Controllers\DoctorController::class, 'agregarhorario_doctor']);
 Route::post('/doctor/eliminardoctor/{id}', [App\Http\Controllers\DoctorController::class, 'eliminardoctor']);
 Route::post('/doctor/actualizardoctor/{id}', [App\Http\Controllers\DoctorController::class, 'actualizardoctor']);
+//Horarios//
+Route::get('/doctor/buscarhorarios',[App\Http\Controllers\DoctorController::class, 'buscarhorarios']);
+Route::post('/doctor/agregarhorario_doctor',[App\Http\Controllers\DoctorController::class, 'agregarhorario_doctor']);
 Route::post('/doctor/agregarhorario', [App\Http\Controllers\DoctorController::class, 'agregarhorario']);
 Route::post('/doctor/actualizarhorario/{id}', [App\Http\Controllers\DoctorController::class, 'actualizarhorario']);
 Route::delete('/doctor/eliminarhorario/{id}', [App\Http\Controllers\DoctorController::class, 'eliminarhorario']);
+//Departamentos //
+
+//Citas//
+
 
 Route::middleware(['web'])->group(function () {
 Route::post('/api/pacientes/agregarpaciente', [App\Http\Controllers\PacienteController::class,'agregarpaciente']);
 Route::delete('/api/pacientes/eliminar/{id}', [App\Http\Controllers\PacienteController::class, 'eliminar']);
 Route::post('/api/pacientes/editarpaciente/{id}', [App\Http\Controllers\PacienteController::class, 'update']);
-
 Route::post('/api/user/', [App\Http\Controllers\Loginauth::class, 'validateuser']);
 
 });

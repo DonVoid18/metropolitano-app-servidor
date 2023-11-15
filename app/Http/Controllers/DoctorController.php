@@ -10,21 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class DoctorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function buscarespecialidad()
     {
    
@@ -48,8 +34,6 @@ class DoctorController extends Controller
             $doctor->correo=$request->email;
             $doctor->created_at = now();
             $doctor->save();
-
-
             $doctor = $doctor->id;
 
             DB::commit();
@@ -66,10 +50,8 @@ class DoctorController extends Controller
                 'error'     =>  'Error: '.$e->getMessage()
             ];
         }
-
-
- 
     }
+
 
     public function agregarhorario_doctor(request $request)
     {
@@ -111,6 +93,7 @@ class DoctorController extends Controller
         $doctores = Doctor::with('horarios')->get();
         return response()->json($doctores);
     }
+    
 
     public function actualizardoctor(Request $request, $id)
     {
@@ -125,6 +108,25 @@ class DoctorController extends Controller
     
         return response()->json(['message' => 'Doctor actualizado con éxito']);
     }
+    public function eliminardoctor($id)
+    {
+        $doctor = Doctor::find($id);
+
+        if (!$doctor) {
+            return response()->json(['error' => 'Doctor no encontrado'], 404);
+        }
+
+        // Elimina los horarios asociados al doctor
+        $doctor->horarios()->delete();
+
+        // Finalmente, elimina el doctor
+        $doctor->delete();
+
+        // Devuelve una respuesta actualizada, por ejemplo, la lista de doctores actualizada
+        $doctores = Doctor::all();
+        return response()->json($doctores);
+    }
+    //horario doctor//
     public function agregarhorario(Request $request)
     {
         // Valida los datos recibidos
@@ -178,24 +180,7 @@ class DoctorController extends Controller
         }
     }
 
-    public function eliminardoctor($id)
-    {
-        $doctor = Doctor::find($id);
 
-        if (!$doctor) {
-            return response()->json(['error' => 'Doctor no encontrado'], 404);
-        }
-
-        // Elimina los horarios asociados al doctor
-        $doctor->horarios()->delete();
-
-        // Finalmente, elimina el doctor
-        $doctor->delete();
-
-        // Devuelve una respuesta actualizada, por ejemplo, la lista de doctores actualizada
-        $doctores = Doctor::all();
-        return response()->json($doctores);
-    }
 
     /**
      * Store a newly created resource in storage.
