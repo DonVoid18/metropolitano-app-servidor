@@ -17,12 +17,14 @@ return new class extends Migration
             $table->id();
             $table->foreignId('cod_paciente')->nullable()->references('id')->on('pacientes')->onDelete('restrict');
             $table->foreignId('cod_doctor')->nullable()->references('id')->on('doctores')->onDelete('restrict');
+            $table->foreignId('cod_departamento')->nullable()->references('id')->on('departamentos')->onDelete('restrict');
             $table->string('fecha', 255)->nullable();
             $table->string('hora_inicio', 255)->nullable();
             $table->string('hora_fin', 255)->nullable();
             $table->char('activo', 1)->default('S')->comment("S=si, N=no");
             $table->timestamps();
         });
+        
     }
 
     /**
