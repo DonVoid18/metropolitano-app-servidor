@@ -37,7 +37,10 @@ Route::post('/doctor/agregarhorario', [App\Http\Controllers\DoctorController::cl
 Route::post('/doctor/actualizarhorario/{id}', [App\Http\Controllers\DoctorController::class, 'actualizarhorario']);
 Route::delete('/doctor/eliminarhorario/{id}', [App\Http\Controllers\DoctorController::class, 'eliminarhorario']);
 //Departamentos //
-
+Route::get('/departamento/buscardepartamento',[App\Http\Controllers\DepartamentoController::class, 'listardepartamento']);
+Route::post('/departamento/agregardepartamento',[App\Http\Controllers\DepartamentoController::class, 'agregardepartamento']);
+Route::post('/departamento/actualizardepartamento/{id}',[App\Http\Controllers\DepartamentoController::class, 'actualizardepartamento']);
+Route::post('/departamento/eliminardepartamento/{id}', [App\Http\Controllers\DepartamentoController::class, 'eliminardepartamento']);
 //Citas//
 
 

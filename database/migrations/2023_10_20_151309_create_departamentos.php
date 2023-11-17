@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('departamentos', function (Blueprint $table) {
             $table->id();
+            
             $table->string('nombre', 100)->nullable();
             $table->string('imagen', 255)->nullable();
             $table->string('descripcion', 255)->nullable();
+            $table->string('encargado', 255)->nullable();
             $table->char('activo', 1)->default('S')->comment("S=si, N=no");
             $table->timestamps();
         });

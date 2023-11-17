@@ -23,24 +23,26 @@ class PacienteController extends Controller
     {
         try {
 
+          
             DB::beginTransaction();
-
+          
             $pacientes = new Paciente();
-            $pacientes->numero_documento= $request->dni;
-            $pacientes->nombres = $request->name;
-            $pacientes->apellidos = $request->lastname;
-            $pacientes->telefono = $request->phone;
-            $pacientes->sexo = $request->sex;
+            $pacientes->numero_documento= $request->numero_documento;
+            $pacientes->nombres = $request->nombres;
+            $pacientes->apellido_paterno = $request->apellido_paterno;
+            $pacientes->apellido_materno = $request->apellido_materno;
+            $pacientes->telefono = $request->telefono;
+            $pacientes->sexo = $request->sexo;
             $pacientes->password = $request->password;
-            $pacientes->estado_civil = $request->civil_status;
-            $pacientes->direccion= $request->address;
-            $pacientes->fecha_nacimiento= $request->birthdate;
-            $pacientes->grupo_sangre= $request->blood_group;
-            $pacientes->email = $request->email;
+            $pacientes->estado_civil = $request->estado_civil;
+            $pacientes->direccion= $request->direccion;
+            $pacientes->fecha_nacimiento= $request->fecha_nacimiento;
+            $pacientes->grupo_sangre= $request->grupo_sangre;
+            $pacientes->correo = $request->correo;
 
-            if ($request->has('image')) {
+            if ($request->has('imagen')) {
                 // Obtener la cadena base64 de la imagen
-                $imagenBase64 = $request->input('image');
+                $imagenBase64 = $request->input('imagen');
     
                 // Decodificar la cadena base64 a datos binarios
                 $imagenBinaria = base64_decode(explode(',', $imagenBase64)[1]);
@@ -111,31 +113,31 @@ class PacienteController extends Controller
         // Verifica si se encontró un paciente
         if ($pacientes) {
             // Actualiza los datos del paciente
-            $pacientes->numero_documento= $request->dni;
-            $pacientes->nombres = $request->name;
-            $pacientes->apellidos = $request->lastname;
-            $pacientes->telefono = $request->phone;
-            $pacientes->sexo = $request->sex;
+            $pacientes->numero_documento= $request->numero_documento;
+            $pacientes->nombres = $request->nombres;
+            $pacientes->apellido_paterno = $request->apellido_paterno;
+            $pacientes->apellido_materno = $request->apellido_materno;
+            $pacientes->telefono = $request->telefono;
+            $pacientes->sexo = $request->sexo;
             $pacientes->password = $request->password;
-            $pacientes->estado_civil = $request->civil_status;
-            $pacientes->grupo_sangre = $request->blood_group;
-            $pacientes->direccion= $request->address;
-            $pacientes->fecha_nacimiento= $request->birthdate;
-            $pacientes->grupo_sangre= $request->blood_group;
-            $pacientes->email = $request->email;
+            $pacientes->estado_civil = $request->estado_civil;
+            $pacientes->grupo_sangre = $request->grupo_sangre;
+            $pacientes->direccion= $request->direccion;
+            $pacientes->fecha_nacimiento= $request->fecha_nacimiento;
+            $pacientes->correo = $request->correo;
 
             // $pacientes->imagen =$request->image;
-            $nombreArchivo = $request->image;
+            $nombreArchivo = $request->imagen;
             $image = Paciente::where('imagen', $nombreArchivo)->first();
 
             if ($image) {
 
-                $pacientes->imagen =$request->image;
+                $pacientes->imagen =$request->imagen;
             
             } 
             else 
             {
-                $imagenBase64 = $request->input('image');
+                $imagenBase64 = $request->input('imagen');
     
                 // Decodificar la cadena base64 a datos binarios
                 $imagenBinaria = base64_decode(explode(',', $imagenBase64)[1]);
@@ -148,6 +150,7 @@ class PacienteController extends Controller
     
                 // Actualizar el modelo con la ruta del archivo guardado
                 $pacientes->imagen =  $nombreArchivo;
+                
 
             }
   
@@ -157,11 +160,12 @@ class PacienteController extends Controller
 
             DB::commit();
 
-            return [
-                'action' => 'success',
-                'title' => 'Bien!!',
-                'message' => 'Los enlaces se crearon con éxito.'
-            ];
+            
+                    return response()->json([
+                        'id_actualizado' => $id,
+                        'nuevo_nombre_imagen' =>  $pacientes->imagen,
+                        'mensaje' => 'Imagen actualizada con éxito',
+                    ]);
 
         }
 
