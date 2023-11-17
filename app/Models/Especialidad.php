@@ -9,4 +9,9 @@ class Especialidad extends Model
 {
     use HasFactory;
     protected $table = 'especialidades';
+
+    public function doctor()
+    {
+        return $this->belongsTo(Doctor::class);
+    }
 }

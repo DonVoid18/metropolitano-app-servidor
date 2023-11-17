@@ -90,10 +90,13 @@ class DoctorController extends Controller
 
     public function listardoctores()
     {
-        $doctores = Doctor::with('horarios')->get();
+        $doctores = Doctor::with(['horarios', 'especialidades'])->get();
         return response()->json($doctores);
     }
     
+
+    
+
 
     public function actualizardoctor(Request $request, $id)
     {

@@ -31,6 +31,11 @@ class Doctor extends Model
         return $this->hasMany(Horario::class, 'cod_doctor', 'id');
     }
 
+    public function especialidades()
+    {
+        return $this->belongsToMany(Especialidad::class, 'doctores', 'id', 'cod_especialidad');
+    }
+
     public function citas()
     {
         return $this->hasMany(Cita::class, 'cod_doctor', 'id');
