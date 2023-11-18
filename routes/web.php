@@ -18,7 +18,9 @@ Route::get('/', function () {
 });
 
 Route::get('/get-csrf-token', [App\Http\Controllers\PacienteController::class, 'getCsrfToken']);
-
+//usuarios//
+Route::post('/usuarios/agregarusuario',[App\Http\Controllers\UsuarioController::class, 'agregarusuario']);
+Route::post('/usuarios/buscarusuario',[App\Http\Controllers\UsuarioController::class, 'validarusuario']);
 //pacientes//
 Route::get('/pacientes/buscarpacientes',[App\Http\Controllers\PacienteController::class, 'listarPacientes']);
 Route::post('/pacientes/agregarpaciente',[App\Http\Controllers\PacienteController::class, 'agregarpaciente']);
