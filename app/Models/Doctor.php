@@ -36,6 +36,8 @@ class Doctor extends Model
         return $this->belongsToMany(Especialidad::class, 'doctores', 'id', 'cod_especialidad');
     }
 
+
+
     public function citas()
     {
         return $this->hasMany(Cita::class, 'cod_doctor', 'id');

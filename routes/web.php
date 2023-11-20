@@ -44,8 +44,11 @@ Route::post('/departamento/agregardepartamento',[App\Http\Controllers\Departamen
 Route::post('/departamento/actualizardepartamento/{id}',[App\Http\Controllers\DepartamentoController::class, 'actualizardepartamento']);
 Route::post('/departamento/eliminardepartamento/{id}', [App\Http\Controllers\DepartamentoController::class, 'eliminardepartamento']);
 //Citas//
-
-
+Route::get('/citas/buscarcitas',[App\Http\Controllers\CitaController::class, 'buscarcitas']);
+Route::post('/citas/agregarcitas',[App\Http\Controllers\CitaController::class, 'agregarcitas']);
+Route::post('/citas/actualizarcitas/{id}',[App\Http\Controllers\CitaController::class, 'actualizarcitas']); //data,id
+Route::delete('/citas/eliminarcitas/{id}', [App\Http\Controllers\CitaController::class, 'eliminarcitas']);
+//
 Route::middleware(['web'])->group(function () {
 Route::post('/api/pacientes/agregarpaciente', [App\Http\Controllers\PacienteController::class,'agregarpaciente']);
 Route::delete('/api/pacientes/eliminar/{id}', [App\Http\Controllers\PacienteController::class, 'eliminar']);
