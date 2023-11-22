@@ -48,6 +48,7 @@ Route::get('/citas/buscarcitas',[App\Http\Controllers\CitaController::class, 'bu
 Route::post('/citas/agregarcitas',[App\Http\Controllers\CitaController::class, 'agregarcitas']);
 Route::post('/citas/actualizarcitas/{id}',[App\Http\Controllers\CitaController::class, 'actualizarcitas']); //data,id
 Route::delete('/citas/eliminarcitas/{id}', [App\Http\Controllers\CitaController::class, 'eliminarcitas']);
+
 //
 Route::middleware(['web'])->group(function () {
 Route::post('/api/pacientes/agregarpaciente', [App\Http\Controllers\PacienteController::class,'agregarpaciente']);

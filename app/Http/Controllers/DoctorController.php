@@ -26,19 +26,20 @@ class DoctorController extends Controller
             DB::beginTransaction();
             $doctor = new Doctor();
             $doctor->dni =$request->dni;
-            $doctor->nombres=$request->name;
-            $doctor->apellidos=$request->lastname;
-            $doctor->cod_especialidad=$request->specialty;
-            $doctor->sexo=$request->sex;
-            $doctor->telefono=$request->phone;
-            $doctor->correo=$request->email;
+            $doctor->nombres=$request->nombres;
+            $doctor->apellidos=$request->apellidos;
+            $doctor->cod_especialidad=$request->cod_especialidad;
+            $doctor->sexo=$request->sexo;
+            $doctor->telefono=$request->telefono;
+            $doctor->correo=$request->correo;
             $doctor->created_at = now();
             $doctor->save();
             $doctor = $doctor->id;
 
             DB::commit();
 
-            return response()->json(['id' => $doctor], 201); 
+            return response()->json(['action' => 'success', 'id' => $doctor], 201);
+
 
         } catch (\Exception $e) {
             DB::rollBack();
@@ -59,14 +60,18 @@ class DoctorController extends Controller
         try {
 
             DB::beginTransaction();
-
-                $horario = new Horario();
-                $horario->cod_doctor = $request->doctor ;
-                $horario->dias_semana =$request->dia_semana;
-                $horario->entrada =$request-> inicio;
-                $horario->salida =$request->fin;
-                $horario->created_at = now();
-                $horario->save();
+                $doctorId = $request->input('doctorId');    
+                $horarios = $request->input('horarios');
+                foreach ($horarios as $horarioData) {
+                    
+                    $horario = new Horario();
+                    $horario->doctor_id = $doctorId;
+                    $horario->inicio = $horarioData['inicio'];
+                    $horario->fin = $horarioData['fin'];
+                    $horario->dias_semana = $horarioData['dias_semana'];
+                    // Agrega otras propiedades según tu modelo Horario
+                    $horario->save();
+                }
 
             DB::commit();
            
@@ -132,29 +137,43 @@ class DoctorController extends Controller
     //horario doctor//
     public function agregarhorario(Request $request)
     {
-        // Valida los datos recibidos
-        // Crea un nuevo horario
-        $horario = Horario::create([
-            'cod_doctor' => $request->cod_doctor,
-            'entrada' => $request->entrada,
-            'salida' => $request->salida,
-            'dias_semana' => $request->dias_semana,
-            'created_at' => $request->created_at,
-        ]);
-        
+ 
+        try {
 
-        
-        $respuesta = [
-            'id' => $horario->id,
-            'cod_doctor' => $horario->cod_doctor,
-            'entrada' => $horario->entrada,
-            'salida' => $horario->salida,
-            'dias_semana' => $horario->dias_semana,
-            'created_at' => $horario->created_at,
-            
-        ];
-        // Devuelve el horario recién creado
-        return response()->json($respuesta, 201);
+            DB::beginTransaction();
+
+                $doctorId = $request->input('doctorId');    
+                $horarios = $request->input('horarios');
+
+                foreach ($horarios as $horarioData) {
+                    
+                    $horario = new Horario();
+                    $horario->cod_doctor = $doctorId;
+                    $horario->entrada = $horarioData['inicio'];
+                    $horario->salida = $horarioData['fin'];
+                    $horario->dias_semana = $horarioData['dias_semana'];
+                    // Agrega otras propiedades según tu modelo Horario
+                    $horario->save();
+                }
+
+            DB::commit();
+           
+            return [
+                'action'    =>  'success',
+                'title'     =>  'Bien!!',
+                'message'   =>  ' Se registró con éxito.',
+            ];
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return [
+                'action'    =>  'error',
+                'title'     =>  'Incorrecto!!',
+                'message'   =>  'Ocurrio un error al crear los Enlaces, intente nuevamente o contacte al Administrador del Sistema. Código de error: '.$e->getMessage(),
+                'error'     =>  'Error: '.$e->getMessage()
+            ];
+        }
     }
 
 
