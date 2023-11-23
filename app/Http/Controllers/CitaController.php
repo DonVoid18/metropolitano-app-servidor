@@ -62,15 +62,17 @@ class CitaController extends Controller
             $cita->hora_fin=$request->hora_fin;
             $cita->updated_at=$request->now();
             $cita->save();
+            
+            DB::commit();
+
+            return [
+                'action' => 'success',
+                'title' => 'Bien!!',
+                'message' => 'Los enlaces se crearon con éxito.'
+            ];
         }
 
-        DB::commit();
-
-        return [
-            'action' => 'success',
-            'title' => 'Bien!!',
-            'message' => 'Los enlaces se crearon con éxito.'
-        ];
+    
     } catch (\Exception $e) {
         DB::rollBack();
 
