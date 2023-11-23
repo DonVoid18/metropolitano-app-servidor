@@ -22,6 +22,9 @@ class CitaController extends Controller
             'horarios' => function ($query) {
                 $query->where('horarios.activo', 'S');
             },
+            'departamento' => function ($query) {
+                $query->where('departamentos.activo', 'S');
+            },
             'especialidades' => function ($query) {
                 $query->where('especialidades.activo', 'S');
             }
@@ -29,6 +32,7 @@ class CitaController extends Controller
         ->where('doctores.activo', 'S')
         ->get();
 
+        
         $citas = Cita::where('activo', 'S')->get();
 
         $departamentos = Departamento::where('activo', 'S')->get();

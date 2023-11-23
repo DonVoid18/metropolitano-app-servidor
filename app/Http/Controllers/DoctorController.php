@@ -29,6 +29,7 @@ class DoctorController extends Controller
             $doctor->nombres=$request->nombres;
             $doctor->apellidos=$request->apellidos;
             $doctor->cod_especialidad=$request->cod_especialidad;
+            $doctor->cod_departamento=$request->cod_departamento;
             $doctor->sexo=$request->sexo;
             $doctor->telefono=$request->telefono;
             $doctor->correo=$request->correo;
@@ -95,7 +96,7 @@ class DoctorController extends Controller
 
     public function listardoctores()
     {
-        $doctores = Doctor::with(['horarios', 'especialidades'])->get();
+        $doctores = Doctor::with(['horarios','departamento','especialidades'])->get();
         return response()->json($doctores);
     }
     

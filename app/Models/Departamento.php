@@ -15,4 +15,9 @@ class Departamento extends Model
     {
         return Carbon::parse($value)->format('Y-m-d');
     }
+    
+    public function doctor()
+    {
+        return $this->belongsTo(Doctor::class);
+    }
 }

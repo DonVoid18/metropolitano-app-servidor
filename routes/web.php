@@ -43,7 +43,7 @@ Route::get('/departamento/buscardepartamento',[App\Http\Controllers\Departamento
 Route::post('/departamento/agregardepartamento',[App\Http\Controllers\DepartamentoController::class, 'agregardepartamento']);
 Route::post('/departamento/actualizardepartamento/{id}',[App\Http\Controllers\DepartamentoController::class, 'actualizardepartamento']);
 Route::post('/departamento/eliminardepartamento/{id}', [App\Http\Controllers\DepartamentoController::class, 'eliminardepartamento']);
-//Citas//
+//Citas//   
 Route::get('/citas/buscarcitas',[App\Http\Controllers\CitaController::class, 'buscarcitas']);
 Route::post('/citas/agregarcitas',[App\Http\Controllers\CitaController::class, 'agregarcitas']);
 Route::post('/citas/actualizarcitas/{id}',[App\Http\Controllers\CitaController::class, 'actualizarcitas']); //data,id

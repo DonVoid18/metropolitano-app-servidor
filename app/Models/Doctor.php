@@ -15,6 +15,7 @@ class Doctor extends Model
         'nombres',
         'apellidos',
         'cod_especialidad',
+        'cod_departamento',
         'sexo',
         'telefono',
         'correo',
@@ -36,7 +37,10 @@ class Doctor extends Model
         return $this->belongsToMany(Especialidad::class, 'doctores', 'id', 'cod_especialidad');
     }
 
-
+    public function departamento()
+    {
+        return $this->belongsTo(Departamento::class, 'cod_departamento', 'id');
+    }
 
     public function citas()
     {
