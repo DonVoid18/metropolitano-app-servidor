@@ -18,29 +18,27 @@ class CitaController extends Controller
     public function buscarcitas()
     {
 
-        $doctores = Doctor::with([
-            'horarios' => function ($query) {
-                $query->where('horarios.activo', 'S');
-            },
-            'departamento' => function ($query) {
-                $query->where('departamentos.activo', 'S');
-            },
-            'especialidades' => function ($query) {
-                $query->where('especialidades.activo', 'S');
-            }
-        ])
-        ->where('doctores.activo', 'S')
-        ->get();
+        // $doctores = Doctor::with([
+        //     'horarios' => function ($query) {
+        //         $query->where('horarios.activo', 'S');
+        //     },
+        //     'departamento' => function ($query) {
+        //         $query->where('departamentos.activo', 'S');
+        //     },
+        //     'especialidades' => function ($query) {
+        //         $query->where('especialidades.activo', 'S');
+        //     }
+        // ])
+        // ->where('doctores.activo', 'S')
+        // ->get();
 
         
         $citas = Cita::where('activo', 'S')->get();
 
-        $departamentos = Departamento::where('activo', 'S')->get();
+        // $departamentos = Departamento::where('activo', 'S')->get();
         
         return response()->json([
-            'doctores' => $doctores,
             'citas' => $citas,
-            'departamentos' => $departamentos,
         ]);
 
     }
@@ -66,7 +64,7 @@ class CitaController extends Controller
             $cita->cod_departamento =$request->cod_departamento;
             $cita->fecha =$request->fecha;
             $cita->hora_inicio=$request->hora_inicio;
-            $cita->hora_fin=$request->hora_inicio;
+            $cita->hora_fin=$request->hora_fin;
             $cita->updated_at=$request->now();
         }
 

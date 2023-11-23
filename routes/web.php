@@ -47,7 +47,7 @@ Route::post('/departamento/eliminardepartamento/{id}', [App\Http\Controllers\Dep
 Route::get('/citas/buscarcitas',[App\Http\Controllers\CitaController::class, 'buscarcitas']);
 Route::post('/citas/agregarcitas',[App\Http\Controllers\CitaController::class, 'agregarcitas']);
 Route::post('/citas/actualizarcitas/{id}',[App\Http\Controllers\CitaController::class, 'actualizarcitas']); //data,id
-Route::delete('/citas/eliminarcitas/{id}', [App\Http\Controllers\CitaController::class, 'eliminarcitas']);
+Route::delete('/citas/eliminar  citas/{id}', [App\Http\Controllers\CitaController::class, 'eliminarcitas']);
 
 //
 Route::middleware(['web'])->group(function () {
