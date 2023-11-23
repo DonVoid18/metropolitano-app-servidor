@@ -97,7 +97,7 @@ class DoctorController extends Controller
     public function listardoctores()
     {
         $doctores = Doctor::with(['horarios','departamento','especialidades'])->get();
-        return response()->json($doctores);
+            return response()->json($doctores);
     }
     
 
@@ -112,11 +112,54 @@ class DoctorController extends Controller
         if ($request->has('activo') && $request->input('activo') === 'Activo') {
             $request->merge(['activo' => 'S']);
         }
-    
         $doctor->update($request->all());
-    
+
+        $horariosAnteriores = $request->input('horarioanterior');
+        foreach ($horariosAnteriores as $horarioAnterior) {
+            // Verificar si el horario no está registrado
+            if (!$horarioAnterior['registrado']) {
+                // Eliminar el horario de la base de datos
+                Horario::where([
+                    'cod_doctor' => $id,
+                    'dias_semana' => $horarioAnterior['dias_semana'],
+                    'entrada' => $horarioAnterior['entrada'],
+                    'salida' => $horarioAnterior['salida'],
+                    // Asegúrate de ajustar estas condiciones según tu modelo y estructura de base de datos
+                    // Puedes agregar más condiciones si es necesario
+                ])->delete();
+            }
+        }
+
+        $horariosNuevos = $request->input('horarios');
+
+        foreach ($horariosNuevos as $horarioNuevo) {
+            // Verificar si el horario no existe en la base de datos para este doctor
+            $existenciaHorario = Horario::where([
+                'cod_doctor' => $id,
+                'dias_semana' => $horarioNuevo['dias_semana'],
+                'entrada' => $horarioNuevo['entrada'],
+                'salida' => $horarioNuevo['salida'],
+                // Ajusta estas condiciones según tu modelo y estructura de base de datos
+                // Puedes agregar más condiciones si es necesario
+            ])->exists();
+            // Si el horario no existe, regístralo
+            if (!$existenciaHorario) {
+                Horario::create([
+                    'cod_doctor' =>  $id,
+                    'dias_semana' => $horarioNuevo['dias_semana'],
+                    'entrada' => $horarioNuevo['entrada'],
+                    'salida' => $horarioNuevo['salida'],
+                    // Ajusta estos campos según tu modelo y estructura de base de datos
+                    // Puedes agregar más campos si es necesario
+                ]);
+            }
+        }
+
+        
         return response()->json(['message' => 'Doctor actualizado con éxito']);
     }
+        
+
     public function eliminardoctor($id)
     {
         $doctor = Doctor::find($id);
