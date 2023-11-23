@@ -17,7 +17,6 @@ class CitaController extends Controller
      */
     public function buscarcitas()
     {
-
         // $doctores = Doctor::with([
         //     'horarios' => function ($query) {
         //         $query->where('horarios.activo', 'S');
@@ -31,12 +30,8 @@ class CitaController extends Controller
         // ])
         // ->where('doctores.activo', 'S')
         // ->get();
-
-        
+        // $departamentos = Departamento::where('activo', 'S')->get();       
         $citas = Cita::where('activo', 'S')->get();
-
-        // $departamentos = Departamento::where('activo', 'S')->get();
-        
         return response()->json([
             'citas' => $citas,
         ]);
