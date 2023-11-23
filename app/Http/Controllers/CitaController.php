@@ -61,6 +61,7 @@ class CitaController extends Controller
             $cita->hora_inicio=$request->hora_inicio;
             $cita->hora_fin=$request->hora_fin;
             $cita->updated_at=$request->now();
+            $cita->save();
         }
 
         DB::commit();
