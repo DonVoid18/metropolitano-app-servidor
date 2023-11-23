@@ -193,8 +193,8 @@ class DoctorController extends Controller
                     
                     $horario = new Horario();
                     $horario->cod_doctor = $doctorId;
-                    $horario->entrada = $horarioData['inicio'];
-                    $horario->salida = $horarioData['fin'];
+                    $horario->entrada = $horarioData['entrada'];
+                    $horario->salida = $horarioData['salida'];
                     $horario->dias_semana = $horarioData['dias_semana'];
                     // Agrega otras propiedades según tu modelo Horario
                     $horario->save();
