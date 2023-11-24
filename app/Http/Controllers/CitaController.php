@@ -47,11 +47,7 @@ class CitaController extends Controller
     {
         try {
 
-        $citapaciente = Cita::find($request->cod_paciente);
-
-        if($citapaciente)
-
-        {   
+    
             DB::beginTransaction();
             $cita = new Cita();
             $cita ->cod_paciente =$request->cod_paciente;
@@ -62,7 +58,7 @@ class CitaController extends Controller
             $cita->hora_fin=$request->hora_fin;
             $cita->updated_at=$request->now();
             $cita->save();
-            
+
             DB::commit();
 
             return [
@@ -70,8 +66,7 @@ class CitaController extends Controller
                 'title' => 'Bien!!',
                 'message' => 'Los enlaces se crearon con éxito.'
             ];
-        }
-
+        
     
     } catch (\Exception $e) {
         DB::rollBack();
