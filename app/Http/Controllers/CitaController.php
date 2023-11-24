@@ -49,6 +49,7 @@ class CitaController extends Controller
 
     
             DB::beginTransaction();
+
             $cita = new Cita();
             $cita ->cod_paciente =$request->cod_paciente;
             $cita ->cod_doctor =$request->cod_doctor;
@@ -56,7 +57,7 @@ class CitaController extends Controller
             $cita->fecha =$request->fecha;
             $cita->hora_inicio=$request->hora_inicio;
             $cita->hora_fin=$request->hora_fin;
-            $cita->updated_at=$request->now();
+            $cita->updated_at= now();
             $cita->save();
 
             DB::commit();
